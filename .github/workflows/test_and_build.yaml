@@ -33,6 +33,8 @@ jobs:
     - name: Install dependencies
       run: |
         pip install -r requirements.txt
+    - name: Install Playwright Browsers
+      run: |
         playwright install
 
     - name: Run tests
