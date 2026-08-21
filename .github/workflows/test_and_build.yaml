@@ -1,0 +1,40 @@
+# This workflow will install Python dependencies, run tests and lint with a single version of Python
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python
+# Nombre del flujo de trabajo
+name: Test and Build
+
+# Indica cuando se ejecutará el flujo de trabajo, en este caso 
+# cuando se haga push o pull request a la rama main
+on:
+  push:
+    branches: [ "main" ]
+
+# Indica los permisos que tendrá el flujo de trabajo, en este caso 
+# solo lectura de contenido
+permissions:
+  contents: read
+
+# Indica los trabajos que se ejecutarán en el flujo de trabajo, en este 
+# caso
+jobs:
+  test_and_build:
+
+    # Indica el sistema operativo en el que se ejecutará el trabajo, en este caso
+    runs-on: ubuntu-latest
+
+    # Indica los pasos que se ejecutarán en el trabajo, en este caso
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up Python 3.10
+      uses: actions/setup-python@v3
+      with:
+        python-version: "3.10"
+
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt
+    - name: Run tests
+      working-directory: ./tests
+      run: |
+        pytest check-out_test/test_check_out_bug_01.py
+        pytest login_test/test_logins.py
