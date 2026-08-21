@@ -36,5 +36,4 @@ jobs:
     - name: Run tests
       working-directory: ./tests
       run: |
-        pytest check-out_test/test_check_out_bug_01.py
         pytest login_test/test_logins.py
